@@ -8,24 +8,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>GameRunning</title>
+    <link rel="stylesheet" href="main.css" type="text/css"/>
 </head>
 <body>
 
 <body>
-<h1>Nim game is in progress</h1>
+    <h1>Nim game is in progress</h1>
+    <h3>SessionID: ${sessionid}</h3>
+        <p>Number of stones left: ${gameinfo.getCurrentStone()}</p>
+        <p>Limit of stone removal: ${gameinfo.getUpperbound()}</p><br>
+        <p>Player's ${playername} turn:</p><br>
 
-<p>Stones left:</p>
-<span>${user1.getUsername()}</span>
-<p>Stones left:</p>
-<span>${StonesLeft}</span>
-<p>Limit of stone removal:</p>
-<span>${LimitOfStonesRemoval}</span>
-<form action="gameInProgress.jsp" method="post">
-    <label>Remove stones:</label>
-    <input type="text" name="stonesRemoved" >
-    <input type = "submit" value ="Start Game" id = "submit">
-</form>
+    <form action="gamerunning" method="post">
+        <label for="rmvstone">Remove stones:</label>
+        <input id = "rmvstone" type="number" name="stonesRemoved">
+        <input type = "submit" value ="remove" id = "submit">
+    </form>
+
 </body>
 
 </body>

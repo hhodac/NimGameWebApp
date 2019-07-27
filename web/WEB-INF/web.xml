@@ -48,6 +48,11 @@
         <servlet-class>PlayGameServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>RemoveStoneServlet</servlet-name>
+        <servlet-class>RemoveStoneServlet</servlet-class>
+    </servlet>
+
     <!-- Define servlet's URL mapping -->
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
@@ -72,6 +77,11 @@
     <servlet-mapping>
         <servlet-name>PlayGameServlet</servlet-name>
         <url-pattern>/playgame</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>RemoveStoneServlet</servlet-name>
+        <url-pattern>/gamerunning</url-pattern>
     </servlet-mapping>
 
 </web-app>

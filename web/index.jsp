@@ -8,10 +8,10 @@
   <!-- Bootstrap CSS -->
 <%--  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">--%>
   <link rel="stylesheet" href="main.css" type="text/css"/>
-  <title>Hello, world!</title>
+  <title>Homepage</title>
 </head>
 <body>
-<h1>Play game</h1>
+<h1>Welcome to the game of Nim</h1>
 
 <form action = playerNamePage.html>
   <input type = submit value = "play now">

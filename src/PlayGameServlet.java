@@ -19,7 +19,7 @@ public class PlayGameServlet extends HttpServlet {
         db.setConnection();
         String p1name = request.getParameter("player1");
         String p2name = request.getParameter("player2");
-        
+
         int removeStone = request.getIntHeader("stonesRemoved");
         try {
             db.addAccount(p1name);

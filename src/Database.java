@@ -10,11 +10,11 @@ public class Database {
 //    private Connection conn;
 
     private static final String driver = "com.mysql.jdbc.Driver";
-    private static final String username = "nimgame";
+    private static final String username = "nimgame@nimgamedb";
     private static final String password = "MySQLnim2019";
     private static final String database = "nimdb";
     private static final String url = "jdbc:mysql://nimgamedb.mysql.database.azure.com:3306/" + database +
-            "?autoReconnect=true&useSSL=false";
+            "?autoReconnect=true&useSSL=true";
     private Connection conn;
 
     // Constructors
@@ -66,20 +66,19 @@ public class Database {
     }
 
     // addAccount
-    public boolean addAccount (String username, String password)
+    public boolean addAccount (String username)
             throws SQLException {
         PreparedStatement updateAccount = null;
         try {
             setConnection();
             this.conn.setAutoCommit(false);
             String query;
-            query = "INSERT INTO WinterProj.TEST "
-                    + "(testid, tname, tpass)"
-                    + " VALUES (default, ?, ?)";
+            query = "INSERT INTO nimdb.Player "
+                    + "(playerid, username)"
+                    + " VALUES (default, ?)";
 
             updateAccount = conn.prepareStatement(query);
             updateAccount.setString (1, username);
-            updateAccount.setString (2, password);
             updateAccount.executeUpdate();
             conn.commit();
             System.out.println("Update successful");

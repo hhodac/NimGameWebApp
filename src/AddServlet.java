@@ -21,7 +21,7 @@ public class AddServlet extends HttpServlet {
         String password = request.getParameter("upass");
         db.setConnection();
         try {
-            if (db.addAccount(username, password)) {
+            if (db.addAccount(username)) {
                 writer.println("<html>");
                 writer.println("<body>");
                 writer.println("<h1>Successfully created new account.</h1>");

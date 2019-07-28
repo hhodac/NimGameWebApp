@@ -110,12 +110,6 @@ public class Database {
                 throw new SQLException("User not found.");
             }
         }
-//        catch (SQLException err) {
-//            System.out.println("SQL error.");
-//            System.out.println(err.getMessage());
-//            System.out.println();
-//            return false;
-//        }
         finally {
             if (updateAccount != null) {
                 updateAccount.close();

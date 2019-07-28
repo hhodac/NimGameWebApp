@@ -16,7 +16,7 @@
     <h1>Search for players</h1>
     <form method = "get" action= "search">
         <label for = "uname"></label>
-        <p>Search for username: <input id = "uname" type = "text" name = "username" required pattern="[a-zA-Z0-9.!]+"></p>
+        <p>Search for username: <input id = "uname" type = "text" name = "username" required"></p>
         <button type="submit">Submit!</button>
     </form>
 

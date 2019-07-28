@@ -1,14 +1,6 @@
 import java.sql.*;
 
 public class Database {
-//    private static final String driver = "com.mysql.jdbc.Driver";
-//    private static final String username = "root";
-//    private static final String password = "Casper169.";
-//    private static final String database = "WinterProj";
-//    private static final String url = "jdbc:mysql://localhost:3306/" + database +
-//            "?autoReconnect=true&useSSL=false";
-//    private Connection conn;
-
     private static final String driver = "com.mysql.jdbc.Driver";
     private static final String username = "nimgame@nimgamedb";
     private static final String password = "MySQLnim2019";

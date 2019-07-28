@@ -66,14 +66,14 @@ public class Database {
     }
 
     // addAccount
-    public boolean addAccount (String username)
+    public void addAccount (String username)
             throws SQLException {
         PreparedStatement updateAccount = null;
         try {
             setConnection();
             this.conn.setAutoCommit(false);
             String query;
-            query = "INSERT INTO nimdb.Player "
+            query = "INSERT INTO nimdb.player "
                     + "(playerid, username)"
                     + " VALUES (default, ?)";
 
@@ -82,13 +82,11 @@ public class Database {
             updateAccount.executeUpdate();
             conn.commit();
             System.out.println("Update successful");
-            return true;
         }
         catch (SQLException err) {
             System.out.println("SQL error.");
             err.printStackTrace();
             System.out.println();
-            return false;
         }
         finally {
             if (updateAccount != null) {
@@ -108,8 +106,8 @@ public class Database {
             this.conn.setAutoCommit(false);
             String query;
             if (isUsernameExist(username)) {
-                query = "DELETE FROM WinterProj.TEST " +
-                        "WHERE tname = ?";
+                query = "DELETE FROM nimdb.player " +
+                        "WHERE username = ?";
                 updateAccount = conn.prepareStatement(query);
                 updateAccount.setString (1, username);
                 updateAccount.executeUpdate();
@@ -141,14 +139,14 @@ public class Database {
         Database db = new Database();
         db.setConnection();
         Connection conn = db.getConnection();
-        String check_exist = "SELECT testid FROM TEST WHERE tname = '"+username+"'";
-        System.out.println(check_exist);
+        String searchQuery = "SELECT playerid FROM player WHERE username = '"+username+"'";
+        System.out.println(searchQuery);
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(check_exist);
+        ResultSet rs = stmt.executeQuery(searchQuery);
         int count = 0;
         while(rs.next()){
             //Retrieve by column name
-            int id  = rs.getInt("testid");
+            int id  = rs.getInt("playerid");
             //Display values
             System.out.print("ID: " + id);
             count++;
@@ -172,14 +170,9 @@ public class Database {
         Database db = new Database();
         db.setConnection();
         Connection conn = db.getConnection();
-        String searchQuery = "SELECT testid, tname, tpass FROM TEST WHERE tname LIKE '"+username+"'";
-        Statement stmt = conn.createStatement();
-        return stmt.executeQuery(searchQuery);
-
-//        String searchPreQuery = "SELECT testid, tname, tpass FROM TEST WHERE tname LIKE ?";
-//        PreparedStatement prestmt = conn.prepareStatement(searchPreQuery);
-//        prestmt.setString(1, username);
-//        return prestmt.executeQuery();
-
+        String searchQuery = "SELECT playerid, username FROM player WHERE username LIKE ?";
+        PreparedStatement prestmt = conn.prepareStatement(searchQuery);
+        prestmt.setString(1, "%"+username+"%");
+        return prestmt.executeQuery();
     }
 }

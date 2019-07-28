@@ -17,45 +17,34 @@ public class AddServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         PrintWriter writer = response.getWriter();
         Database db = new Database();
-        String username = request.getParameter("uname");
-        String password = request.getParameter("upass");
+        String username = request.getParameter("username");
         db.setConnection();
         try {
-            if (db.addAccount(username)) {
-                writer.println("<html>");
-                writer.println("<body>");
-                writer.println("<h1>Successfully created new account.</h1>");
-                writer.println("<br>");
-                writer.println("<p>Click <a href='./index.jsp'>here</a> to return to homepage</h1>");
-                writer.println("</body>");
-                writer.println("</html>");
-            } else {
-                writer.println("<html>");
-                writer.println("<body>");
-                writer.println("<h1> created new account.</h1>");
-                writer.println("<br>");
-                writer.println("<p>Click <a href='./index.jsp'>here</a> to return to homepage</h1>");
-                writer.println("</body>");
-                writer.println("</html>");
-            }
+           db.addAccount(username);
+            writer.println("<html>");
+            writer.println("<head>");
+            writer.println("<title>SignupSuccess</title>");
+            writer.println("<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\" integrity=\"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T\" crossorigin=\"anonymous\">");
+            writer.println("<link rel=\"stylesheet\" href=\"main.css\" type=\"text/css\"/>");
+            writer.println("</head>");
+            writer.println("<body>");
+            writer.println("<h1>Successfully added "+username+" account.</h1>");
+            writer.println("<br>");
+            writer.println("<p>Click <a href='./index.jsp'>here</a> to return to homepage</h1>");
+            writer.println("</body>");
+            writer.println("</html>");
         }
         catch (MySQLIntegrityConstraintViolationException err) {
-            writer.println("<html>");
-            writer.println("<body>");
-            writer.println("<h1>"+username+" is already exist.</h1>");
-            writer.println("<br>");
-            writer.println("<p>Click <a href='./index.jsp'>here</a> to return to homepage</h1>");
-            writer.println("</body>");
-            writer.println("</html>");
+            String url = "/playerInvalidSignUp.jsp";
+            String errorMessage = username + "  is already exists.";
+            request.setAttribute("errorMessage", errorMessage);
+            getServletContext().getRequestDispatcher(url).forward(request,response);
         }
         catch (SQLException err) {
-            writer.println("<html>");
-            writer.println("<body>");
-            writer.println("<h1>SQL invalid.</h1>");
-            writer.println("<br>");
-            writer.println("<p>Click <a href='./index.jsp'>here</a> to return to homepage</h1>");
-            writer.println("</body>");
-            writer.println("</html>");
+            String url = "/playerInvalidSignUp.jsp";
+            String errorMessage = username + "SQL invalid.";
+            request.setAttribute("errorMessage", errorMessage);
+            getServletContext().getRequestDispatcher(url).forward(request,response);
         }
     }
 

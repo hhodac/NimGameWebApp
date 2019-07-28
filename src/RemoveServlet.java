@@ -16,31 +16,32 @@ public class RemoveServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
-        PrintWriter writer = response.getWriter();
+        PrintWriter out = response.getWriter();
 
-        String username = request.getParameter("uname");
+        String username = request.getParameter("username");
         Database db = new Database();
         db.setConnection();
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>RemovePlayer</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<center><h1>Remove username result</h1>");
         try {
-            if(db.removeAccount(username)) {
-                writer.println("<html>");
-                writer.println("<body>");
-                writer.println("<h1>Successfully removed "+username+" account.</h1>");
-                writer.println("<br>");
-                writer.println("<p>Click <a href='./index.jsp'>here</a> to return to homepage</h1>");
-                writer.println("</body>");
-                writer.println("</html>");
-            }
+            if (db.isUsernameExist(username)) {
+                db.removeAccount(username);
+                out.print("<p>Successfully removed " + username + "!</p><br>");
+            } else out.println("Username not found!");
         }
         catch (SQLException err) {
-            writer.println("<html>");
-            writer.println("<body>");
-            writer.println("<h1>"+err.getMessage()+"</h1>");
-            writer.println("<br>");
-            writer.println("<p>Click <a href='./index.jsp'>here</a> to return to homepage</h1>");
-            writer.println("</body>");
-            writer.println("</html>");
+            out.println("<p>An error occured while removing player from database: "
+                    + err.toString() + "</p><br>");
         }
+        out.println("</center>");
+        out.println("<p>Click <a href='./index.jsp'>here</a> to return to homepage</h1>");
+        out.println("</body>");
+        out.println("</html>");
+        out.close();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
